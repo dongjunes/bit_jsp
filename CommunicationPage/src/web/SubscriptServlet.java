@@ -39,13 +39,13 @@ public class SubscriptServlet extends HttpServlet {
 		Statement stmt = null;
 
 		try {
-
+			System.out.println("new script try");
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webdb", "root", "1234");
 			if (conn == null) {
 				throw new Exception("데이터를 연결할 수 없습니다.");
 			}
-
+			System.out.println("new script try2");
 			stmt = conn.createStatement();
 			String command = String.format("insert into userinformation(name, id, password) values('%s','%s','%s');",
 					name, id, password);
@@ -53,7 +53,7 @@ public class SubscriptServlet extends HttpServlet {
 			if (rowNum < 1) {
 				throw new Exception("데이터를 입력할 수 없습니다.");
 			}
-
+			System.out.println("데이터 입력 완료");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("SubScriptResult.jsp");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
